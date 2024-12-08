@@ -12,4 +12,9 @@ class Category extends Model
         'name',
         'status',
     ];
+
+
+    public function products(){
+        return $this->hasOne(Products::class);
+    }
 }

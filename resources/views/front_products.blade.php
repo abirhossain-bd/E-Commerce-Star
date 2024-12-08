@@ -18,7 +18,9 @@
             <!-- Content Section -->
             <div
                 class="p-4 border border-secondary border-top-0 rounded-bottom d-flex flex-column flex-grow-1">
-                <h4 class="mb-3">{{ $product->name }}</h4>
+                <h4 style="height: 25px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="mb-3">
+                    {{ $product->title }}
+                </h4>
 
                 <!-- Description with Scrollbar -->
                 <p
