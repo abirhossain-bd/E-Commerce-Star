@@ -4,7 +4,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ProductController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubCategoryController;
@@ -30,14 +32,6 @@ Route::get('shop',[HomeController::class,'shop'])->name('shop');
 Route::get('product_details', function () {
     return view('product_details');
 })->name('product.details');
-
-Route::get('cart', function () {
-    return view('cart');
-})->name('cart');
-
-Route::get('checkout', function () {
-    return view('checkout');
-})->name('checkout');
 
 Route::get('testimonial', function () {
     return view('testimonial');
@@ -87,4 +81,14 @@ Route::middleware(['auth'])->group(function () {
         Route::post('status/{id}',[ProductController::class,'status'])->name('product.status');
     });
 
+
+    Route::get('cart',[CartController::class,'index'])->name('cart');
+    Route::get('add/cart',[CartController::class,'addCart'])->name('add.cart');
+    Route::get('update/cart',[CartController::class,'updateCart'])->name('update.cart');
+    Route::get('remove/cart',[CartController::class,'removeCart'])->name('remove.cart');
+    Route::get('total/payout',[CartController::class,'totalPayout'])->name('total.payout');
+
+
+    Route::get('checkout',[CheckoutController::class,'index'])->name('checkout');
+    
 });

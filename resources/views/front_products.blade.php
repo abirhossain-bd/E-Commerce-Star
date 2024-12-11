@@ -30,9 +30,9 @@
 
                 <!-- Price and Button -->
                 <div class="d-flex justify-content-between align-items-center mt-auto">
-                    <p class="text-dark fs-5 fw-bold mb-0">{{ $product->price }}</p>
-                    <a href="#"
-                        class="btn border border-secondary rounded-pill px-3 text-primary">
+                    <p class="text-dark fs-5 fw-bold mb-0">{{ $product->discount_price }}</p>
+                    <a href="{{ Auth::user() ? 'javascript:void(0);' : route('login') }}"
+                        class="btn border border-secondary rounded-pill px-3 text-primary add_to_cart" data-prod_id="{{ $product->id }}">
                         <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to
                         cart
                     </a>

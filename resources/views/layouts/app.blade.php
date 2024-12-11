@@ -1,9 +1,14 @@
+@php
+    use App\Models\Cart;
+    $cart_count = Cart::where('user_id', Auth::id())->count();
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
         <meta charset="utf-8">
-        <title>Fruitables - Vegetable Website Template</title>
+        <title>ShopSmart</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -24,6 +29,7 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
         <!-- Template Stylesheet -->
         <link href="{{asset('css/style.css')}}" rel="stylesheet">
@@ -155,11 +161,34 @@
     <script src="{{asset('lib/waypoints/waypoints.min.js')}}"></script>
     <script src="{{asset('lib/lightbox/js/lightbox.min.js')}}"></script>
     <script src="{{asset('lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <!-- Template Javascript -->
     <script src="{{asset('js/main.js')}}"></script>
 
     @stack('scripts')
+
+
+    <script>
+        $(document).on('click','.add_to_cart',function(){
+            var prod_id = $(this).data('prod_id');
+            $.ajax({
+                url:"{{ route('add.cart') }}",
+                type:"GET",
+                data:{prod_id},
+                success:function(response){
+                    if (response.success) {
+                        toastr.success(response.message);
+                        $(document).find('.cart_counter').text(response.cart_count);
+                    }
+                },
+                error:function(error){
+                    console.log(error);
+
+                }
+            })
+        })
+    </script>
     </body>
 
 </html>

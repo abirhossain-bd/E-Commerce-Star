@@ -17,7 +17,7 @@
                     </div>
                     <div class="x_content">
                         <br />
-                        <form action="{{ route('category.store') }}" method="POST">
+                        <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="item form-group">
@@ -28,6 +28,18 @@
                                     <input name="name" type="text" class="form-control " placeholder="Category Name">
 
                                     @error('name')
+                                        <p class="text-danger mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Image
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input name="image" type="file" class="form-control ">
+
+                                    @error('image')
                                         <p class="text-danger mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -66,6 +78,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Image</th>
                                     <th>Name</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -75,6 +88,9 @@
                                 @foreach ($categories as $k=> $category)
                                     <tr>
                                         <th scope="row">{{ $k+1 }}</th>
+                                        <td>
+                                            <img src="{{ asset($category->image) }}" alt="" style="height: 80px; width:100px">
+                                        </td>
                                         <td>{{ $category->name }}</td>
                                         <td>
                                             <div>

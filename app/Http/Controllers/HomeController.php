@@ -21,6 +21,8 @@ class HomeController extends Controller
         $data['subcategories'] = SubCategory::where('status','active')->latest()->get();
         $data['products_eight'] = $products_eight;
         $data['products'] = $products;
+        $data['categories'] = Category::all();
+
 
         if ($request->ajax() && $request->action == 'search_product') {
             return view('front_products')->with($data);
