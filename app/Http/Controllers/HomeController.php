@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Products;
+use App\Models\SpeacialOffer;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,7 @@ class HomeController extends Controller
         $data['products_eight'] = $products_eight;
         $data['products'] = $products;
         $data['categories'] = Category::all();
+        $data['speacialporducts'] = SpeacialOffer::where('status','active')->latest()->paginate(3);
 
 
         if ($request->ajax() && $request->action == 'search_product') {

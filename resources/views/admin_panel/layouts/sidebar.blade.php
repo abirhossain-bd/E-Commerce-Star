@@ -25,6 +25,12 @@
                     <li><a href="{{ route('product.list') }}">List</a></li>
                 </ul>
             </li>
+            <li><a><i class="fas fa-gift "></i> Speacial Offers <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('offer.create') }}">Create</a></li>
+                    <li><a href="{{ route('offer.list') }}">List</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 

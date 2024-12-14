@@ -23,8 +23,7 @@
                             @foreach ($categories as $key => $category)
                                 <div class="carousel-item {{ $key == 0 ? 'active' : '' }} rounded">
                                     <img src="{{ asset($category->image) }}"
-                                        class="img-fluid w-100 h-100 bg-secondary rounded"
-                                        alt="Slide {{ $key + 1 }}">
+                                        class="img-fluid w-100 h-100 bg-secondary rounded" alt="Slide {{ $key + 1 }}">
                                     <a href="#" class="btn px-4 py-2 text-white rounded">
                                         {{ $category->name }}
                                     </a>
@@ -151,45 +150,21 @@
     <div class="container-fluid service py-5">
         <div class="container py-5">
             <div class="row g-4 justify-content-center">
-                <div class="col-md-6 col-lg-4">
-                    <a href="#">
-                        <div class="service-item bg-secondary rounded border border-secondary">
-                            <img src="img/featur-1.jpg" class="img-fluid rounded-top w-100" alt="">
-                            <div class="px-4 rounded-bottom">
-                                <div class="service-content bg-primary text-center p-4 rounded">
-                                    <h5 class="text-white">Fresh Apples</h5>
-                                    <h3 class="mb-0">20% OFF</h3>
+                @foreach ($speacialporducts as $speacial)
+                    <div class="col-md-6 col-lg-4">
+                        <a href="#">
+                            <div class="service-item bg-secondary rounded border border-secondary">
+                                <img style="height: 350px; object-fit: cover;" src="{{ asset($speacial->image) }}" class="img-fluid rounded-top w-100" alt="">
+                                <div class="px-4 rounded-bottom">
+                                    <div class="service-content bg-primary text-center p-4 rounded">
+                                        <h5 class="text-white">{{ $speacial->title }}</h5>
+                                        <h3 class="mb-0">{{ $speacial->offer }}</h3>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <a href="#">
-                        <div class="service-item bg-dark rounded border border-dark">
-                            <img src="img/featur-2.jpg" class="img-fluid rounded-top w-100" alt="">
-                            <div class="px-4 rounded-bottom">
-                                <div class="service-content bg-light text-center p-4 rounded">
-                                    <h5 class="text-primary">Tasty Fruits</h5>
-                                    <h3 class="mb-0">Free delivery</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <a href="#">
-                        <div class="service-item bg-primary rounded border border-primary">
-                            <img src="img/featur-3.jpg" class="img-fluid rounded-top w-100" alt="">
-                            <div class="px-4 rounded-bottom">
-                                <div class="service-content bg-secondary text-center p-4 rounded">
-                                    <h5 class="text-white">Exotic Vegitable</h5>
-                                    <h3 class="mb-0">Discount 30$</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -205,7 +180,8 @@
                 @foreach ($products as $product)
                     <div class="border border-primary rounded position-relative vesitable-item">
                         <div class="vesitable-img">
-                            <img src="{{ asset($product->image) }}" class="img-fluid w-100 rounded-top" alt="{{ $product->name }}" style="height: 250px; object-fit: cover;">
+                            <img src="{{ asset($product->image) }}" class="img-fluid w-100 rounded-top"
+                                alt="{{ $product->title }}" style="height: 250px; object-fit: cover;">
                         </div>
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
                             style="top: 10px; right: 10px;">{{ $product->subCategory->name }}</div>
@@ -219,7 +195,9 @@
                             </p>
                             <div class="d-flex justify-content-between flex-lg-wrap">
                                 <p class="text-dark fs-5 fw-bold mb-0">{{ $product->discount_price }}</p>
-                                <a href="{{ Auth::user() ? 'javascript:void(0);' : route('login') }}" class="btn border border-secondary rounded-pill px-3 text-primary add_to_cart" data-prod_id="{{ $product->id }}"><i
+                                <a href="{{ Auth::user() ? 'javascript:void(0);' : route('login') }}"
+                                    class="btn border border-secondary rounded-pill px-3 text-primary add_to_cart"
+                                    data-prod_id="{{ $product->id }}"><i
                                         class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                             </div>
                         </div>
@@ -279,7 +257,8 @@
                         <div class="p-4 rounded bg-light">
                             <div class="row align-items-center">
                                 <div class="col-6">
-                                    <img src="{{ asset($product->image) }}" class="img-fluid rounded-circle w-100" alt=""style="height: 180px; object-fit: cover;">
+                                    <img src="{{ asset($product->image) }}" class="img-fluid rounded-circle w-100"
+                                        alt=""style="height: 180px; object-fit: cover;">
                                 </div>
                                 <div class="col-6">
                                     <a href="#" class="h5">{{ $product->title }}</a>
@@ -291,7 +270,9 @@
                                         <i class="fas fa-star"></i>
                                     </div>
                                     <h4 class="mb-3">{{ $product->discount_price }}</h4>
-                                    <a href="{{ Auth::user() ? 'javascript:void(0);' : route('login') }}" class="btn border border-secondary rounded-pill px-3 text-primary add_to_cart" data-prod_id="{{ $product->id }}"><i
+                                    <a href="{{ Auth::user() ? 'javascript:void(0);' : route('login') }}"
+                                        class="btn border border-secondary rounded-pill px-3 text-primary add_to_cart"
+                                        data-prod_id="{{ $product->id }}"><i
                                             class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                                 </div>
                             </div>

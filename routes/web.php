@@ -9,6 +9,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductDetailsController;
+use App\Http\Controllers\SpeacialOfferController;
 use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,9 +31,9 @@ Route::get('shop',[HomeController::class,'shop'])->name('shop');
 
 
 
-Route::get('product_details', function () {
-    return view('product_details');
-})->name('product.details');
+
+
+Route::get('product/details',[ProductDetailsController::class,'index'])->name('product.details');
 
 Route::get('testimonial', function () {
     return view('testimonial');
@@ -90,5 +92,12 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('checkout',[CheckoutController::class,'index'])->name('checkout');
-    
+
+
+    Route::get('offer/list',[SpeacialOfferController::class,'index'])->name('offer.list');
+    Route::get('offer/create',[SpeacialOfferController::class,'offerCreate'])->name('offer.create');
+    Route::post('offer/store',[SpeacialOfferController::class,'store'])->name('offer.store');
+    Route::post('offer/status/{id}',[SpeacialOfferController::class,'status'])->name('offer.status');
+
+
 });
