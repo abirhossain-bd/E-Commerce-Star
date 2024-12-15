@@ -2,8 +2,14 @@
     <div class="menu_section">
         <h3>General</h3>
         <ul class="nav side-menu">
-            <li><a href="{{ route('user.list') }}"><i class="fa fa-users"></i> Users <span
-                        class="fa fa-chevron-down"></span></a>
+            <li>
+                <a href="{{ route('home') }}" target="blank">
+                    <i class="fa fa-eye"></i> View Website
+               </a>
+            </li>
+
+            <li><a href="{{ route('user.list') }}"><i class="fa fa-users"></i> Users
+                       </a>
             </li>
 
 
