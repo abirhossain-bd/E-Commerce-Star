@@ -8,6 +8,9 @@
                </a>
             </li>
 
+            <li><a href="{{ route('dashboard') }}"><i class="fas fa-home"></i> Dashboard
+                       </a>
+            </li>
             <li><a href="{{ route('user.list') }}"><i class="fa fa-users"></i> Users
                        </a>
             </li>

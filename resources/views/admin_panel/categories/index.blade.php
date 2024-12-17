@@ -37,7 +37,9 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="image" type="file" class="form-control ">
+                                    <img id="cat_img" src="{{ asset('uploads/default/defaultimg.png') }}" alt="" style="height: 120px; widht:100%; object-fit:contain; border-radius:30px; margin: 10px 0;">
+
+                                    <input onchange="document.querySelector('#cat_img').src=window.URL.createObjectURL(this.files[0])" name="image" type="file" class="form-control ">
 
                                     @error('image')
                                         <p class="text-danger mt-2">{{ $message }}</p>
@@ -90,6 +92,8 @@
                                         <th scope="row">{{ $k+1 }}</th>
                                         <td>
                                             <img src="{{ asset($category->image) }}" alt="" style="height: 80px; width:100px">
+
+
                                         </td>
                                         <td>{{ $category->name }}</td>
                                         <td>
@@ -106,9 +110,14 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div>
-                                                <a class="btn btn-info btn-sm" href="#"><i class="fa fa-edit"></i></a>
-                                                <a class="btn btn-danger btn-sm" href="#"><i class="fa fa-trash"></i></a>
+                                            <div class="d-flex justify-content-arround">
+                                                <a class="btn btn-info btn-sm" href="{{ route('category.edit', $category->id) }}"><i class="fa fa-edit"></i></a>
+
+                                                <form action="{{ route('category.delete',$category->id) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+
+                                                </form>
                                             </div>
                                         </td>
 

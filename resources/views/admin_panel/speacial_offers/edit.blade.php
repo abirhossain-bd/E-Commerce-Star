@@ -15,7 +15,7 @@
                     </div>
                     <div class="x_content">
                         <br />
-                        <form action="{{ route('offer.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('offer.update',$speacial_offer->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="item form-group">
@@ -23,7 +23,7 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="title" type="text" class="form-control ">
+                                    <input name="title" type="text" class="form-control " value="{{ $speacial_offer->title }}">
                                     @error('title')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -34,7 +34,7 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="offer" type="text" class="form-control ">
+                                    <input name="offer" type="text" class="form-control " value="{{ $speacial_offer->offer }}">
                                     @error('offer')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -48,10 +48,10 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select name="category_id" class="form-control" >
+                                    <select name="category_id" class="form-control">
                                         <option value="">Select Category</option>
-                                        @foreach ($categories as $category )
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}" {{ $speacial_offer->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('category_id')
@@ -67,8 +67,10 @@
                                 <div class="col-md-6 col-sm-6 ">
                                     <select name="subcategory_id" class="form-control">
                                         <option value="">Select Sub-Category</option>
-                                        @foreach ($subcategories as $sub_cat )
-                                            <option value="{{ $sub_cat->id }}" class="data_category_options" data-category_id="{{ $sub_cat->category_id }}" style="display: none">{{ $sub_cat->name }}</option>
+                                        @foreach ($subcategories as $sub_cat)
+                                            <option value="{{ $sub_cat->id }}"{{ $speacial_offer->subcategory_id == $sub_cat->id ? 'selected' : '' }} class="data_category_options"
+                                                data-category_id="{{ $sub_cat->category_id }}" style="display: none">
+                                                {{ $sub_cat->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('subcategory_id')
@@ -82,7 +84,7 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="image" type="file" class="form-control ">
+                                    <input name="image" type="file" class="form-control " value="{{ $speacial_offer->image }}">
                                     @error('image')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -94,7 +96,7 @@
                                 <div class="col-md-6 col-sm-6 offset-md-3">
                                     <button class="btn btn-primary" type="button">Cancel</button>
                                     <button class="btn btn-primary" type="reset">Reset</button>
-                                    <button type="submit" class="btn btn-success">Submit</button>
+                                    <button type="submit" class="btn btn-success">Update</button>
                                 </div>
                             </div>
 
@@ -108,13 +110,11 @@
 @endsection
 
 @push('scripts')
-
     <script>
-        $('select[name=category_id]').change(function(){
+        $('select[name=category_id]').change(function() {
             var category_id = $(this).val();
             $('.data_category_options').hide();
-            $('.data_category_options[data-category_id='+ category_id +']').show();
+            $('.data_category_options[data-category_id=' + category_id + ']').show();
         });
     </script>
-
 @endpush

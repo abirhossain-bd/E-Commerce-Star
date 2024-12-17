@@ -66,12 +66,18 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('category/')->group(function(){
         Route::get('index',[CategoryController::class,'index'])->name('category.index');
         Route::post('store',[CategoryController::class,'store'])->name('category.store');
+        Route::get('edit/{id}',[CategoryController::class,'edit'])->name('category.edit');
+        Route::post('update/{id}',[CategoryController::class,'update'])->name('category.update');
+        Route::post('delete/{id}',[CategoryController::class,'destroy'])->name('category.delete');
         Route::post('status/{id}',[CategoryController::class,'status'])->name('category.status');
     });
 
     Route::prefix('subcategory/')->group(function(){
         Route::get('index',[SubCategoryController::class,'index'])->name('subcategory.index');
         Route::post('store',[SubCategoryController::class,'store'])->name('subcategory.store');
+        Route::get('edit/{id}',[SubCategoryController::class,'edit'])->name('subcategory.edit');
+        Route::post('update/{id}',[SubCategoryController::class,'update'])->name('subcategory.update');
+        Route::post('delete/{id}',[SubCategoryController::class,'destroy'])->name('subcategory.delete');
         Route::post('status/{id}',[SubCategoryController::class,'status'])->name('subcategory.status');
     });
 
@@ -80,6 +86,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('list',[ProductController::class,'index'])->name('product.list');
         Route::get('create',[ProductController::class,'create'])->name('product.create');
         Route::post('store',[ProductController::class,'store'])->name('product.store');
+        Route::get('edit/{id}',[ProductController::class,'edit'])->name('product.edit');
+        Route::post('update/{id}',[ProductController::class,'update'])->name('product.update');
+        Route::post('delete/{id}',[ProductController::class,'destroy'])->name('product.delete');
         Route::post('status/{id}',[ProductController::class,'status'])->name('product.status');
     });
 
@@ -97,6 +106,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('offer/list',[SpeacialOfferController::class,'index'])->name('offer.list');
     Route::get('offer/create',[SpeacialOfferController::class,'offerCreate'])->name('offer.create');
     Route::post('offer/store',[SpeacialOfferController::class,'store'])->name('offer.store');
+    Route::get('offer/edit/{id}',[SpeacialOfferController::class,'edit'])->name('offer.edit');
+    Route::post('offer/update/{id}',[SpeacialOfferController::class,'update'])->name('offer.update');
+    Route::post('offer/delete/{id}',[SpeacialOfferController::class,'destroy'])->name('offer.delete');
     Route::post('offer/status/{id}',[SpeacialOfferController::class,'status'])->name('offer.status');
 
 

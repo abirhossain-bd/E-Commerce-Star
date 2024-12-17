@@ -55,9 +55,14 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <div>
-                                                <a class="btn btn-info btn-sm" href="#"><i class="fa fa-edit"></i></a>
-                                                <a class="btn btn-danger btn-sm" href="#"><i class="fa fa-trash"></i></a>
+                                            <div class="d-flex justify-content-arround">
+                                                <a class="btn btn-info btn-sm" href="{{ route('product.edit', $product->id) }}"><i class="fa fa-edit"></i></a>
+
+                                                <form action="{{ route('product.delete', $product->id) }}" method="POST">
+                                                    @csrf
+
+                                                    <button type="submit" class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i></button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
@@ -65,7 +70,7 @@
 
                             </tbody>
                         </table>
-
+                        {{ $products->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>

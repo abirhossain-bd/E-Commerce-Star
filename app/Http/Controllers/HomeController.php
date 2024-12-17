@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index(Request $request){
 
         $products_eight = Products::where('status','active')->latest()->paginate(8);
-        $products = Products::where('status','active')->get();
+        $products = Products::where('status','active')->paginate(12);
 
         if ($request->ajax() && $request->action == 'search_product') {
             $products_eight = Products::where('sub_category_id',$request->sub_cat_id)->paginate(8);

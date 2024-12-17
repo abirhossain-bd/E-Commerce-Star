@@ -1,6 +1,5 @@
 @extends('admin_panel.layouts.app')
 
-
 @section('content')
     <!-- page content -->
     <div class="">
@@ -9,13 +8,13 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Product <small>Create</small></h2>
+                        <h2>Edit <small>Product</small></h2>
 
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
                         <br />
-                        <form action="{{ route('offer.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="item form-group">
@@ -23,35 +22,56 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="title" type="text" class="form-control ">
+                                    <input name="title" type="text" class="form-control" value="{{ $product->title }}">
                                     @error('title')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align">Offer
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Price
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="offer" type="text" class="form-control ">
-                                    @error('offer')
+                                    <input name="price" type="number" class="form-control " value="{{ $product->price }}">
+                                    @error('price')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
 
-
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Discount Price
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input name="discount_price" type="number" class="form-control " value="{{ $product->discount_price }}">
+                                    @error('discount_price')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Description
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <textarea name="description" cols="30" rows="5" class="form-control" >{{ $product->description }}"</textarea>
+                                    @error('description')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Category
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select name="category_id" class="form-control" >
+                                    <select name="category_id" class="form-control">
                                         <option value="">Select Category</option>
-                                        @foreach ($categories as $category )
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}"{{ $category->id == $product->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('category_id')
@@ -65,13 +85,15 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select name="subcategory_id" class="form-control">
+                                    <select name="sub_category_id" class="form-control">
                                         <option value="">Select Sub-Category</option>
-                                        @foreach ($subcategories as $sub_cat )
-                                            <option value="{{ $sub_cat->id }}" class="data_category_options" data-category_id="{{ $sub_cat->category_id }}" style="display: none">{{ $sub_cat->name }}</option>
+                                        @foreach ($subcategories as $sub_cat)
+                                            <option value="{{ $sub_cat->id }}"{{ $sub_cat->id == $product->sub_category_id ? 'selected' : ' ' }} class="data_category_options"
+                                                data-category_id="{{ $sub_cat->category_id }}" style="display: none">
+                                                {{ $sub_cat->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('subcategory_id')
+                                    @error('sub_category_id')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -82,7 +104,7 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="image" type="file" class="form-control ">
+                                    <input name="image" type="file" class="form-control" value="{{ $product->image }}">
                                     @error('image')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -94,7 +116,7 @@
                                 <div class="col-md-6 col-sm-6 offset-md-3">
                                     <button class="btn btn-primary" type="button">Cancel</button>
                                     <button class="btn btn-primary" type="reset">Reset</button>
-                                    <button type="submit" class="btn btn-success">Submit</button>
+                                    <button type="submit" class="btn btn-success">Update</button>
                                 </div>
                             </div>
 
@@ -106,6 +128,7 @@
     </div>
     <!-- /page content -->
 @endsection
+
 
 @push('scripts')
 

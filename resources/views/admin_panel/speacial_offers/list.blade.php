@@ -50,7 +50,7 @@
                                             <img src="{{ asset($product->image) }}" height="100", width="100">
                                         </td>
                                         <td>
-                                            
+
                                             <form id="sp_prods{{ $product->id }}"
                                                 action="{{ route('offer.status', $product->id) }}" method="POST">
                                                 @csrf
@@ -64,10 +64,15 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <div>
-                                                <a class="btn btn-info btn-sm" href="#"><i class="fa fa-edit"></i></a>
-                                                <a class="btn btn-danger btn-sm" href="#"><i
-                                                        class="fa fa-trash"></i></a>
+                                            <div class="d-flex justify-content-arround">
+                                                <a class="btn btn-info btn-sm" href="{{ route('offer.edit', $product->id) }}"><i class="fa fa-edit"></i></a>
+
+                                                <form action="{{ route('offer.delete',$product->id) }}" method="POST">
+                                                    @csrf
+
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                                            class="fa fa-trash"></i></button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
